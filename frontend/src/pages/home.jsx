@@ -1,12 +1,29 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
-  // DB에서 가져올 임시 운동 데이터
-  const exercises = [
-    { id: 1, name: '벤치 프레스', desc: '대흉근 발달을 위한 필수 근력 운동' },
-    { id: 2, name: '데드리프트', desc: '전신 근력 및 코어 강화' },
-    { id: 3, name: '스쿼트', desc: '하체 근력과 근육량 증가의 꽃' }
-  ];
+  const [exercises, setExercises] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // 백엔드 API에서 전체 운동 목록 가져오기
+    const fetchExercises = async () => {
+      try {
+        const API_URL = import.meta.env.VITE_API_URL || 'https://health-project-sie2.onrender.com';
+        const response = await fetch(`${API_URL}/api/exercises`);
+        const data = await response.json();
+        setExercises(data); // DB에서 가져온 6개 데이터를 상태에 저장
+      } catch (error) {
+        console.error('운동 데이터를 불러오는데 실패했습니다.', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExercises();
+  }, []);
+
+  if (loading) return <div style={{ padding: '20px' }}>데이터를 불러오는 중입니다...</div>;
 
   return (
     <div style={{ padding: '20px' }}>
@@ -17,7 +34,8 @@ function Home() {
         {exercises.map(ex => (
           <div key={ex.id} style={{ border: '1px solid #ccc', margin: '10px 0', padding: '15px' }}>
             <h3>{ex.name}</h3>
-            <p>{ex.desc}</p>
+            {/* DB의 컬럼명이 description이므로 맞게 출력 */}
+            <p>{ex.description}</p>
             <Link to={`/exercise/${ex.id}`}>
               <button>자세히 보기</button>
             </Link>
