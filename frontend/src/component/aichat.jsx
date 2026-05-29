@@ -13,7 +13,7 @@ function AIChatbot() {
     
     try {
       // 백엔드 서버로 질문 전송
-      const response = await fetch('https://health-project-sie2.onrender.com', {
+      const response = await fetch('https://health-project-sie2.onrender.com/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: question })
