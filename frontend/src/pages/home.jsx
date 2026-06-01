@@ -74,7 +74,7 @@ function Home() {
           <div key={ex.id} style={cardStyle} className="exercise-card">
             {/* 데이터베이스 ID와 매칭되는 이미지 출력 */}
             <img 
-              src={`/images/ex${ex.id}.png`} 
+              src={`/image/ex${ex.id}.png`} 
               alt={ex.name} 
               style={imageStyle}
             />
