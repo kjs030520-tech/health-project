@@ -30,10 +30,10 @@ function Detail() {
     // 1. 백엔드 API에서 특정 운동 상세 정보 가져오기
     const fetchExerciseDetail = async () => {
       try {
-        // ✅ 도메인 주소만 남겨둡니다.
+        // 도메인 주소만 남겨둡니다.
         const API_URL = import.meta.env.VITE_API_URL || 'https://health-project-sie2.onrender.com';
         
-        // ✅ 여기서 상세 경로를 붙여서 최종 완성합니다.
+        //여기서 상세 경로를 붙여서 최종 완성합니다.
         const response = await fetch(`${API_URL}/api/exercises/${id}`);
         
         if (!response.ok) throw new Error('데이터를 불러오는데 실패했습니다.');
