@@ -1,34 +1,31 @@
 name: Health Project CI Pipeline
 
-# 어떤 행동을 할 때 이 액션이 실행될지 설정
 on:
   push:
-    branches: [ "main" ] # main 브랜치에 코드가 push 될 때마다 실행
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # 가상의 리눅스 컴퓨터를 한 대 빌림
+    runs-on: ubuntu-latest
 
     steps:
     - name: 📥 1. 깃허브에서 최신 코드 가져오기
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: ⚙️ 2. Node.js 환경 세팅하기
-      uses: actions/setup-node@v3
+    - name: ⚙️ 2. Node.js 최신 안정화 버전(20.x) 세팅
+      uses: actions/setup-node@v4
       with:
-        node-version: '18.x' # 안정적인 Node 버전을 사용
+        node-version: '20.x'
 
     - name: 🛠️ 3. 백엔드(Backend) 패키지 설치 테스트
       run: |
         cd backend
         npm install
-        # 백엔드 코드가 정상적으로 설치되는지 검사
 
     - name: 🖥️ 4. 프론트엔드(Frontend) 빌드 테스트
       run: |
         cd frontend
         npm install
         npm run build
-        # 프론트엔드 코드가 에러 없이 최종 압축(build)되는지 검사
