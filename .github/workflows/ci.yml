@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 1. 깃허브에서 최신 코드 가져오기
+    - name:  1. 깃허브에서 최신 코드 가져오기
       uses: actions/checkout@v4
 
-    - name: ⚙️ 2. Node.js 최신 안정화 버전(20.x) 세팅
+    - name:  2. Node.js 최신 안정화 버전(20.x) 세팅
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
 
-    - name: 🛠️ 3. 백엔드(Backend) 패키지 설치 테스트
+    - name:  3. 백엔드(Backend) 패키지 설치 테스트
       run: |
         cd backend
         npm install
 
-    - name: 🖥️ 4. 프론트엔드(Frontend) 빌드 테스트
+    - name:  4. 프론트엔드(Frontend) 빌드 테스트
       run: |
         cd frontend
         npm install
