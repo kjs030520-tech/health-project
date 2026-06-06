@@ -46,8 +46,7 @@ app.get('/api/exercises', async (req, res) => {
 });
 
 // ==========================================
-// 2. 운동 상세 페이지용 API: 진짜 DB에서 특정 운동 1개 가져오기
-// ==========================================
+// 2. 운동 상세 페이지용 API
 app.get('/api/exercises/:id', async (req, res) => {
   const exerciseId = req.params.id;
   try {
@@ -69,8 +68,6 @@ app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message;
   
   try {
-    // gemini-1.5-flash 모델 사용 (텍스트 처리에 가장 빠르고 효율적임)
-    // ✅ 모델 이름에 -latest 를 붙이거나, 1.5-pro 로 변경합니다.
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     // AI에게 '헬스 트레이너'라는 역할과 맥락(Context)을 부여하는 프롬프트 작성
